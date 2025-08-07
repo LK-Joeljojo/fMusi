@@ -11,5 +11,6 @@ class NavigationBarImages {
 class HomeViewImages {
   static String more = "assets/images/more.png";
   static String search = "assets/images/search.png";
+  static String heartOutline = "assets/images/heart.png";
   
 }

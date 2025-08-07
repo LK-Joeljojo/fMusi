@@ -1,60 +1,60 @@
 import 'package:get/get.dart';
 
-class HomeViewModel extends GetxController {
-  final hostRecommanded = [
+class HomeVM extends GetxController {
+  static final hotRecommanded = [
     {
       "image": "assets/images/juiceWrld2.jpeg",
       "name": "Party Never Ends ",
-      "artist": "juice Wrld",
+      "artist": "Juice Wrld",
     },
      {
       "image": "assets/images/legendsND.jpg",
-      "name": "legends Never Die",
-      "artist": "juice Wrld",
+      "name": "Legends Never Die",
+      "artist": "Juice Wrld",
     },
   ].obs;
-   final playList = [
+  static  final playList = [
     {
       "image": "assets/images/shawnMendes.jpg",
       "name": "Illuminate",
-      "artist": "shawn Mendes",
+      "artist": "Shawn Mendes",
     },
      {
       "image": "assets/images/legendsND.jpg",
-      "name": "legends Never Die",
-      "artist": "juice Wrld",
+      "name": "Legends Never Die",
+      "artist": "Juice Wrld",
     },
     {
       "image": "assets/images/juiceWrld.jpeg",
       "name": "Goodbye and GoodRidance",
-      "artist": "juice Wrld",
+      "artist": "Juice Wrld",
     },
      {
       "image": "assets/images/tiako.jpg",
       "name": "M3lo",
-      "artist": "tiakola",
+      "artist": "Tiakola",
     },
   ].obs;
-   final recentlyPlayed = [
+  static final recentlyPlayed = [
     {
-      "image": "assets/images/juiceWrld.jpeg",
+      "image": "assets/images/juiceWrld2.jpeg",
       "name": "Empty of pockets ",
-      "artist": "juice Wrld",
+      "artist": "Juice Wrld",
     },
      {
       "image": "assets/images/legendsND.jpg",
       "name": "Stay high",
-      "artist": "juice Wrld",
+      "artist": "Juice Wrld",
     },
      {
       "image": "assets/images/tiako.jpg",
       "name": "M3lo",
-      "artist": "tiakola",
+      "artist": "Tiakola",
     },
      {
       "image": "assets/images/shawnMendes.jpg",
       "name": "Treat you better",
-      "artist": "shawn Mendes",
+      "artist": "Shawn Mendes",
     },
   ].obs;
 }

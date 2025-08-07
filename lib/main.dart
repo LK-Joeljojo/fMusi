@@ -9,7 +9,7 @@ void main() {
    WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: JColor.bgColor, // Couleur de la barre de navigation
+    systemNavigationBarColor: JColor.bgColor,
     systemNavigationBarIconBrightness: Brightness.light, // Couleur des icônes (clair ou sombre)
   ));
   runApp(const MyApp());
