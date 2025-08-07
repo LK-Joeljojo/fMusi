@@ -12,5 +12,9 @@ class HomeViewImages {
   static String more = "assets/images/more.png";
   static String search = "assets/images/search.png";
   static String heartOutline = "assets/images/heart.png";
-  
+  static String profilImg = "assets/images/jojo.jpg";
+}
+class DrawerImages {
+  static String paint = "assets/images/paint.png";
+
 }

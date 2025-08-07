@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeVM extends GetxController {
+class HomeViewModel extends GetxController {
+  final txtSearch = TextEditingController().obs;
   static final hotRecommanded = [
     {
       "image": "assets/images/juiceWrld2.jpeg",
