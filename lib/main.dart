@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'FMusic',
       debugShowCheckedModeBanner: false,
       theme: JAppTheme.darkTheme,
-      home: const NavigationBarView(),
+      home:  NavigationBarView(),
     );
   }
 }

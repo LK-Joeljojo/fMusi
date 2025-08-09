@@ -74,7 +74,6 @@ class RecentlySong extends StatelessWidget {
                           color: JColor.primayColor,
                         ),
                         onRatingUpdate: (rating) {
-                          print(rating);
                         },
                       )
                     ],

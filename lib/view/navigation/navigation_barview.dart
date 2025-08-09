@@ -1,40 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fmusic/common/image_asset.dart';
 import 'package:fmusic/view/home/home_view.dart';
+import 'package:fmusic/view/music/music_view.dart';
 import 'package:fmusic/view_model/drawer_view_model.dart';
+import 'package:fmusic/view_model/navigation_bar_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../common/color.dart';
 
-class NavigationBarView extends StatefulWidget {
-  const NavigationBarView({super.key});
+class NavigationBarView extends StatelessWidget {
+   NavigationBarView({super.key});
 
-  @override
-  State<NavigationBarView> createState() => _NavigationBarViewState();
-}
-
-class _NavigationBarViewState extends State<NavigationBarView>
-    with SingleTickerProviderStateMixin {
-  TabController? controller;
-  int selectTab = 0;
-  @override
-  void initState() {
-    super.initState();
-    controller = TabController(length: 3, vsync: this);
-
-    controller?.addListener(() {
-      selectTab = controller?.index ?? 0;
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller?.dispose();
-  }
-
-  var drawerVm = Get.put(DrawerViewModel());
+ 
+ final nbController = Get.put(NavigationBarViewModel());
+ final drawerVm = Get.put(DrawerViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +43,7 @@ class _NavigationBarViewState extends State<NavigationBarView>
                             backgroundImage:
                                 AssetImage(HomeViewImages.profilImg)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Column(
@@ -112,9 +91,9 @@ class _NavigationBarViewState extends State<NavigationBarView>
           ],
         ),
       ),
-      body: TabBarView(controller: controller, children: [
+      body: TabBarView(controller: nbController.controller, children: [
         HomeView(),
-        Container(),
+        MusicView(),
         Container(),
       ]),
       bottomNavigationBar: Container(
@@ -126,12 +105,12 @@ class _NavigationBarViewState extends State<NavigationBarView>
         ]),
         child: BottomAppBar(
           color: JColor.bgColor,
-          //height: 60,
+          height: 60,
           padding: const EdgeInsetsDirectional.only(top: 10),
-          child: TabBar(
+          child: Obx(() => TabBar(
               indicatorWeight: 1,
               indicatorColor: Colors.transparent,
-              controller: controller,
+              controller: nbController.controller,
               labelColor: JColor.whiteColor.withOpacity(0.8),
               labelStyle:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
@@ -142,7 +121,7 @@ class _NavigationBarViewState extends State<NavigationBarView>
                 Tab(
                   text: "Home",
                   icon: Image.asset(
-                    selectTab == 0
+                    nbController.selectTab.value == 0
                         ? NavigationBarImages.home
                         : NavigationBarImages.homeLight,
                     width: 24,
@@ -152,7 +131,7 @@ class _NavigationBarViewState extends State<NavigationBarView>
                 Tab(
                   text: "Songs",
                   icon: Image.asset(
-                    selectTab == 1
+                    nbController.selectTab.value == 1
                         ? NavigationBarImages.musique
                         : NavigationBarImages.musiqueLight,
                     width: 24,
@@ -162,7 +141,7 @@ class _NavigationBarViewState extends State<NavigationBarView>
                 Tab(
                   text: "Settings",
                   icon: Image.asset(
-                    selectTab == 2
+                    nbController.selectTab.value == 2
                         ? NavigationBarImages.settings
                         : NavigationBarImages.settingsLight,
                     width: 24,
@@ -171,6 +150,7 @@ class _NavigationBarViewState extends State<NavigationBarView>
                 ),
               ]),
         ),
+        )
       ),
     );
   }
