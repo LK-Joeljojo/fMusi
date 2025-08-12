@@ -18,3 +18,10 @@ class DrawerImages {
   static String paint = "assets/images/paint.png";
 
 }
+class SettingImages {
+  static String display = "assets/images/display.png";
+  static String headset = "assets/images/headset.png";
+  static String lock = "assets/images/lock.png";
+  static String volume = "assets/images/volume.png";
+  
+}
