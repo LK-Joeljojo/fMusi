@@ -1,5 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fmusic/view/music/allsong_view.dart';
+import 'package:fmusic/view/music/playlist_view.dart';
 import 'package:fmusic/view_model/music_view_model.dart';
 import 'package:get/get.dart';
 import '../../common/color.dart';
@@ -61,7 +63,7 @@ class MusicView extends StatelessWidget {
                 text: "All songs",
               ),
               Tab(
-                text: "Musics",
+                text: "Playlists",
               ),
               Tab(
                 text: "Albums",
@@ -74,17 +76,13 @@ class MusicView extends StatelessWidget {
                 Expanded(
                 child: TabBarView(
                   controller: mVMcontroller.controller,
-                  children: const <Widget>[
-                    Center(
-                      child: Icon(Icons.directions_car),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_transit),
-                    ),
-                    Center(
+                  children: <Widget>[
+                    AllsongView(),
+                    PlaylistView(),
+                    const Center(
                       child: Icon(Icons.directions_bike),
                     ),
-                    Center(
+                    const Center(
                       child: Icon(Icons.directions_car),
                     ),
                   ]

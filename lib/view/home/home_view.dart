@@ -111,9 +111,9 @@ class HomeView extends StatelessWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.only(left: 15),
-                itemCount: HomeViewModel.playList.length,
+                itemCount: homeVM.playList.length,
                 itemBuilder: (context, index) {
-                  final obj = HomeViewModel.playList[index];
+                  final obj = homeVM.playList[index];
                   return PlaylistSong(objet: obj);
                 }),
             ),

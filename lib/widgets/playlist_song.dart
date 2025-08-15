@@ -4,8 +4,9 @@ import '../common/color.dart';
 
 class PlaylistSong extends StatelessWidget {
   final Map objet;
+  final bool hasArtists;
 
-  const PlaylistSong({super.key, required this.objet});
+  const PlaylistSong({super.key, required this.objet,  this.hasArtists = true});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class PlaylistSong extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
+          if(hasArtists)
           Text(objet["artist"],
               style: Theme.of(context).textTheme.labelMedium?.apply(
                   color: JColor.whiteColor.withOpacity(0.7),

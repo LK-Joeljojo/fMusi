@@ -22,6 +22,8 @@ class SettingImages {
   static String display = "assets/images/display.png";
   static String headset = "assets/images/headset.png";
   static String lock = "assets/images/lock.png";
-  static String volume = "assets/images/volume.png";
-  
+  static String volume = "assets/images/volume.png";  
+}
+class MusicImages {
+  static String play = "assets/images/icon-play.png";
 }

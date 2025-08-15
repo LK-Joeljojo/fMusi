@@ -15,7 +15,7 @@ class HomeViewModel extends GetxController {
       "artist": "Juice Wrld",
     },
   ].obs;
-  static  final playList = [
+   final playList = [
     {
       "image": "assets/images/shawnMendes.jpg",
       "name": "Illuminate",
