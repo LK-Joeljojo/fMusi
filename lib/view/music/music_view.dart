@@ -1,6 +1,8 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fmusic/view/music/albums_view.dart';
 import 'package:fmusic/view/music/allsong_view.dart';
+import 'package:fmusic/view/music/artists_view.dart';
 import 'package:fmusic/view/music/playlist_view.dart';
 import 'package:fmusic/view_model/music_view_model.dart';
 import 'package:get/get.dart';
@@ -79,12 +81,8 @@ class MusicView extends StatelessWidget {
                   children: <Widget>[
                     AllsongView(),
                     PlaylistView(),
-                    const Center(
-                      child: Icon(Icons.directions_bike),
-                    ),
-                    const Center(
-                      child: Icon(Icons.directions_car),
-                    ),
+                    AlbumsView(),
+                    ArtistsView()
                   ]
                 )
                ),

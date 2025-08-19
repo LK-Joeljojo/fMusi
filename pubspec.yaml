@@ -89,6 +89,8 @@ fonts:
            weight: 600
          - asset: assets/fonts/Poppins-Bold.ttf
            weight: 700
+
+
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fmusic/common/color.dart';
-import 'package:fmusic/view_model/home_view_model.dart';
 import 'package:fmusic/view_model/playlists_view_model.dart';
 import 'package:fmusic/widgets/playlist_type.dart';
 import 'package:get/get.dart';

@@ -7,5 +7,7 @@ class JColor {
     static const Color whiteColor = Color(0xffFFFFFF);
     static const Color blackColor = Color(0xff000000);
     static const Color dividerColor = Color(0xffFDFDFD);
+    static const Color popupColor = Color(0xff726C68);
+    
 
 }

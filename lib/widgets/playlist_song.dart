@@ -47,7 +47,7 @@ class PlaylistSong extends StatelessWidget {
           Text(objet["artist"],
               style: Theme.of(context).textTheme.labelMedium?.apply(
                   color: JColor.whiteColor.withOpacity(0.7),
-                  fontWeightDelta: 2)),
+                  )),
         ],
       ),
     );
