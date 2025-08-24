@@ -75,13 +75,13 @@ class ArtistsList extends StatelessWidget {
                                               JColor.whiteColor.withOpacity(0.6),
                                         )),
                                 const SizedBox(
-                                  width: 30,
+                                  width: 15,
                                 ),
                                 const Text(
                                   "•",
                                 ),
                                 const SizedBox(
-                                  width: 30,
+                                  width: 15,
                                 ),
                                 Text(objet["songs"],
                                     style: Theme.of(context)

@@ -27,7 +27,7 @@ class ArtistsView extends StatelessWidget {
                 }
               },
               onTap: (){
-                Get.to(ArtistDetailView());
+                Get.to( () =>ArtistDetailView());
               },
             );
           })),

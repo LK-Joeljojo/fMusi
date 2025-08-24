@@ -8,7 +8,7 @@ class MusicViewModel extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(length: 4, vsync: this);
+    controller = TabController(length: 5, vsync: this);
     controller?.addListener(() {
       selectTab.value = controller?.index ?? 0;
     });

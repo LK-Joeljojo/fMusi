@@ -39,23 +39,23 @@ class AlbumsViewModel extends GetxController {
       "artist": "Sean Paul",
     },
   ].obs;
-   final playedSongs = [
+  final playedSongs = [
     {
       "duration": "3:16",
       "name": "Conversations",
       "artist": "Juice Wrld",
     },
-     {
+    {
       "duration": "2:16",
       "name": "Stay high",
       "artist": "Juice Wrld",
     },
-     {
+    {
       "duration": "3:16",
       "name": "Man of the Year",
       "artist": "Juice Wrld",
     },
-     {
+    {
       "duration": "4:16",
       "name": "Righteous",
       "artist": "Juice Wrld",
@@ -65,10 +65,32 @@ class AlbumsViewModel extends GetxController {
       "name": "Blood On My Jeans",
       "artist": "Juice Wrld",
     },
-     {
+    {
       "duration": "2:55",
       "name": "Titanic",
       "artist": "Juice Wrld",
+    },
+  ].obs;
+  final topAlbums = [
+    {
+      "image": "assets/images/legendsND.jpg",
+      "name": "Legends Never Die",
+      "years": "2020"
+    },
+    {
+      "image": "assets/images/juiceWrld.jpeg",
+      "name": "Goodbye and GoodRidance",
+      "years": "2017"
+    },
+    {
+      "image": "assets/images/juiceWrld3.jpeg",
+      "name": "Death Race For Love",
+      "years": "2019"
+    },
+    {
+      "image": "assets/images/juiceWrld2.jpeg",
+      "name": "Party Never Ends ",
+      "years": "2022"
     },
   ].obs;
 }

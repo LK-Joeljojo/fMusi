@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fmusic/view/music/albums_view.dart';
 import 'package:fmusic/view/music/allsong_view.dart';
 import 'package:fmusic/view/music/artists_view.dart';
+import 'package:fmusic/view/music/genres_view.dart';
 import 'package:fmusic/view/music/playlist_view.dart';
 import 'package:fmusic/view_model/music_view_model.dart';
 import 'package:get/get.dart';
@@ -73,6 +74,9 @@ class MusicView extends StatelessWidget {
               Tab(
                 text: "Artistes",
               ),
+              Tab(
+                text: "Genres",
+              ),
             ],
           ),
                 Expanded(
@@ -82,7 +86,8 @@ class MusicView extends StatelessWidget {
                     AllsongView(),
                     PlaylistView(),
                     AlbumsView(),
-                    ArtistsView()
+                    ArtistsView(),
+                    GenresView()
                   ]
                 )
                ),

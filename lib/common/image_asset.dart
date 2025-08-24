@@ -13,6 +13,7 @@ class HomeViewImages {
   static String search = "assets/images/search.png";
   static String heartOutline = "assets/images/heart.png";
   static String profilImg = "assets/images/jojo.jpg";
+  static String close = "assets/images/close.png";
 }
 
 class DrawerImages {
@@ -30,7 +31,16 @@ class MusicImages {
   static String play = "assets/images/icon-play.png";
   static String more = "assets/images/more-fill.png";
   static String juiceWrld = "assets/images/legendsND.jpg";
+  static String jwArtist = "assets/images/jW.jpeg";
   static String musicPlay = "assets/images/music-play.png";
   static String share = "assets/images/share.png";
   static String vibration = "assets/images/vibration.png";
+  static String wave = "assets/images/wave.png";
+  static String solidPlay = "assets/images/solid-play.png";
+  static String forwardLeft = "assets/images/forward-left.png";
+  static String forwardRight = "assets/images/forward-right.png";
+  static String shuffleIcon = "assets/images/shuffle-icon.png";
+  static String repeatIcon = "assets/images/repeat-icon.png";
+  static String playlistIcon = "assets/images/playlist-icon.png";
+  static String equalizerIcon = "assets/images/equalizer-icon.png";
 }

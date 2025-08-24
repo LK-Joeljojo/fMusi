@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmusic/view/main_player/main_player_view.dart';
 import 'package:fmusic/view_model/allsong_view_model.dart';
 import 'package:fmusic/widgets/allsong_row.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,9 @@ class AllsongView extends StatelessWidget {
                 children: [
                   AllsongRow(
                     objet: obj,
-                    onTap: (){},
+                    onTap: (){
+                      Get.to(()=>  const MainPlayerView());
+                    },
                   ),
                 ],
               );
