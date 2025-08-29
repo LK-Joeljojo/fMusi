@@ -51,14 +51,14 @@ class ArtistDetailView extends StatelessWidget {
                       child: Image.asset(
                         MusicImages.jwArtist,
                         width: double.maxFinite,
-                        height: media.height * 0.3,
+                        height: media.width * 0.6,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Container(
                     color: JColor.blackColor.withOpacity(0.3),
-                    height: media.height * 0.3,
+                    height: media.width * 0.6,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 15),

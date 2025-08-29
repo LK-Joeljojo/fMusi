@@ -30,7 +30,7 @@ class MainPlayerView extends StatelessWidget {
       {
         "id": 12,
         "ontap": () {
-          Get.to(() => const DriverModeView());
+          Get.to(() =>  DriverModeView());
         },
         "title": "Driver mode"
       },
@@ -86,17 +86,18 @@ class MainPlayerView extends StatelessWidget {
             ),
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(media.width * 0.6),
-                  child: Image.asset(
-                    MusicImages.juiceWrld,
-                    width: media.width * 0.6,
-                    height: media.width * 0.6,
-                  ),
-                ),
                 SizedBox(
-                  height: media.width * 0.61,
-                  width: media.width * 0.61,
+                      width: media.width * 0.6,
+                      height: media.width * 0.6,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(
+                          MusicImages.juiceWrld,
+                        ),
+                      ),
+                    ),
+                SizedBox(
+                  height: media.width * 0.6,
+                  width: media.width * 0.6,
                   child: SleekCircularSlider(
                     appearance: CircularSliderAppearance(
                       customWidths: CustomSliderWidths(

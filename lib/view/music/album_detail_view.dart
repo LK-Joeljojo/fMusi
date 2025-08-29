@@ -46,14 +46,14 @@ class AlbumDetailView extends StatelessWidget {
                       child: Image.asset(
                         MusicImages.juiceWrld,
                         width: double.maxFinite,
-                        height: media.height * 0.25,
+                        height: media.width * 0.5,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Container(
                     color: JColor.blackColor.withOpacity(0.2),
-                    height: media.height * 0.25,
+                    height: media.width * 0.5,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 15),

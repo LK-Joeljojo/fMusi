@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fmusic/view/main_player/main_player_view.dart';
 import 'package:get/get.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -9,7 +8,7 @@ import '../../view_model/allsong_view_model.dart';
 import '../../widgets/allsong_row.dart';
 
 class PlayPlaylistView extends StatelessWidget {
-   PlayPlaylistView({super.key});
+  PlayPlaylistView({super.key});
   final allSC = Get.put(AllsongViewModel());
 
   @override
@@ -56,17 +55,29 @@ class PlayPlaylistView extends StatelessWidget {
                 ),
                 Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(media.width * 0.4),
-                      child: Image.asset(
-                        MusicImages.juiceWrld,
-                        width: media.width * 0.4,
-                        height: media.width * 0.4,
+                    SizedBox(
+                      width: media.width * 0.4,
+                      height: media.width * 0.4,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(
+                          MusicImages.juiceWrld,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: media.width * 0.4,
+                      height: media.width * 0.4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(media.width * 0.4,),
+                        border: Border.all(
+                          width: 0.5,
+                          color: JColor.whiteColor
+                        )
                       ),
                     ),
                     SizedBox(
-                      height: media.width * 0.41,
-                      width: media.width * 0.41,
+                      height: media.width * 0.4,
+                      width: media.width * 0.4,
                       child: SleekCircularSlider(
                         appearance: CircularSliderAppearance(
                           customWidths: CustomSliderWidths(
@@ -173,25 +184,26 @@ class PlayPlaylistView extends StatelessWidget {
               height: 25,
             ),
             Obx(() {
-        return ListView.builder(
-            itemCount: allSC.allSongs.length,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              final obj = allSC.allSongs[index];
-              return Column(
-                children: [
-                  AllsongRow(
-                    objet: obj,
-                    onTap: (){
-                    ;
-                    },
-                  ),
-                ],
-              );
-            });
-      }),
+              return ListView.builder(
+                  itemCount: allSC.allSongs.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final obj = allSC.allSongs[index];
+                    return Column(
+                      children: [
+                        AllsongRow(
+                          objet: obj,
+                          onTap: () {
+                            
+                          },
+                        ),
+                      ],
+                    );
+                  });
+            }),
           ],
         ),
       ),
