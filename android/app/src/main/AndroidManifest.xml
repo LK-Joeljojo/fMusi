@@ -4,7 +4,7 @@ xmlns:tools="http://schemas.android.com/tools">
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
   <uses-permission android:name="android.permission.CAMERA"/>
-  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tool:node="remove"/>
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" tools:node="remove"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
     <application
@@ -17,7 +17,7 @@ xmlns:tools="http://schemas.android.com/tools">
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-            <intent-filter>
+            </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"

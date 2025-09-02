@@ -7,7 +7,7 @@
     <alpha
         android:fillAfter="true"
         android:fillBefore="true"
-        android:fillEnable="true"
+        android:fillEnabled="true"
         android:fromAlpha="0"
         android:toAlpha="1.0" />
 

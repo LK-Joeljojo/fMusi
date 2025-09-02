@@ -13,7 +13,7 @@ class MusicWidget: AppWidgetProvider(){
 
     override fun onUpdate(
         context: Context?,
-        AppWidgetManager: AppWidgetManager?,
+        appWidgetManager: AppWidgetManager?,
         appWidgetIds: IntArray?
     ) {
         if(appWidgetIds != null) {
@@ -28,7 +28,7 @@ internal fun updateAppWidget(context: Context?,
         appWidgetManager: AppWidgetManager?,
         appWidgetId: Int) {
 
-    val widgetText = context?.getString(R.string.appwidget_text)
+    val widgetText = context?.getString(R.string.appwidget_test)
     val views = RemoteViews(context?.packageName, R.layout.music_widget);
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse("app://fmusic/play"))
 
