@@ -213,7 +213,6 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
         player.setLoopMode(LoopMode.one);
         break;
       case AudioServiceRepeatMode.group:
-
       case AudioServiceRepeatMode.all:
         player.setLoopMode(LoopMode.all);
         break;
@@ -222,7 +221,7 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
 
   @override
   Future<void> setShuffleMode(AudioServiceShuffleMode shuffleMode) async {
-    if( shuffleMode == AudioServiceShuffleMode.none ) {
+    if (shuffleMode == AudioServiceShuffleMode.none) {
       player.setShuffleModeEnabled(false);
     } else {
       player.shuffle();
@@ -232,15 +231,17 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
 
   @override
   Future customAction(String name, [Map<String, dynamic>? extras]) async {
-    if(name == "dispose"){
+    if (name == "dispose") {
       await player.dispose();
       super.stop();
     }
   }
+
   @override
   Future<void> stop() async {
     await player.stop();
-    playbackState.add(playbackState.value.copyWith(processingState: AudioProcessingState.idle));
+    playbackState.add(playbackState.value
+        .copyWith(processingState: AudioProcessingState.idle));
     return super.stop();
   }
 
