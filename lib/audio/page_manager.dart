@@ -1,7 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:fmusic/audio/audio_handler.dart';
 import 'package:fmusic/audio/service_locator.dart';
-import 'package:just_audio/just_audio.dart';
 
 enum ButtonState {
   paused,
@@ -62,6 +62,8 @@ class PageManager {
   void init() async {
     listenToChangeInPlaylist();
     listenToPlayBackState();
+    listenToBufferedPosition();
+    listenToTotalPosition();
   }
 
   void listenToChangeInPlaylist() {
@@ -126,17 +128,60 @@ class PageManager {
           buffered: playbackState.bufferedPosition,
           total: oldState.total);
     });
-
   }
 
   listenToTotalPosition() {
-    audioHandler.playbackState.listen((playbackState) {
+    audioHandler.mediaItem.listen((mediaItem) {
       final oldState = progressNotifier.value;
       progressNotifier.value = ProgressBarState(
           current: oldState.current,
-          buffered: playbackState.bufferedPosition,
-          total: oldState.total);
+          buffered: oldState.buffered,
+          total: mediaItem?.duration ?? Duration.zero);
     });
+  }
 
+  listenToChangesInSong() {
+    audioHandler.mediaItem.listen((mediaItem) {
+      currentSongNotifier.value = mediaItem;
+      updateSkipButton();
+    });
+  }
+
+  void play() => audioHandler.play();
+  void pause() => audioHandler.pause();
+  void seek(Duration position) => audioHandler.seek(position);
+  void previous() => audioHandler.skipToPrevious();
+  void next() => audioHandler.skipToNext();
+
+  Future<void> playAS() async {
+    return await audioHandler.play();
+  }
+
+  Future<void> updateQueue(List<MediaItem> queue) async {
+    return await audioHandler.updateQueue(queue);
+  }
+
+  Future<void> updateMediaItem(MediaItem mediaItem) async {
+    return await audioHandler.updateMediaItem(mediaItem);
+  }
+
+  Future<void> moveMediaItem(int currentIndex, int newIndex) async {
+    return await (audioHandler as AudioPlayerHandler)
+        .moveQueueItem(currentIndex, newIndex);
+  }
+
+  Future<void> removeQueueItemAt(int index) async {
+    return await (audioHandler as AudioPlayerHandler)
+        .removeQueueItemIndex(index);
+  }
+  Future<void> customAction(String name) async {
+    return await audioHandler.customAction(name);
+  }
+  Future<void> skipToAction(int index) async {
+    return await audioHandler.skipToQueueItem(index);
+  }
+
+  void repeat() {
+    
   }
 }
