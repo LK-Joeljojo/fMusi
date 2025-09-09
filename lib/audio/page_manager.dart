@@ -174,14 +174,103 @@ class PageManager {
     return await (audioHandler as AudioPlayerHandler)
         .removeQueueItemIndex(index);
   }
+
   Future<void> customAction(String name) async {
     return await audioHandler.customAction(name);
   }
+
   Future<void> skipToAction(int index) async {
     return await audioHandler.skipToQueueItem(index);
   }
 
   void repeat() {
-    
+    repeatButtonNotifier.nextState();
+    final repeatMode = repeatButtonNotifier.value;
+
+    switch (repeatMode) {
+      case RepeatState.off:
+        audioHandler.setRepeatMode(AudioServiceRepeatMode.none);
+        break;
+
+      case RepeatState.repeatSong:
+        audioHandler.setRepeatMode(AudioServiceRepeatMode.one);
+        break;
+
+      case RepeatState.repeatPlaylist:
+        audioHandler.setRepeatMode(AudioServiceRepeatMode.all);
+        break;
+    }
   }
+
+  Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {
+    switch (repeatMode) {
+      case AudioServiceRepeatMode.none:
+        repeatButtonNotifier.value = RepeatState.off;
+        break;
+
+      case AudioServiceRepeatMode.one:
+        repeatButtonNotifier.value = RepeatState.repeatSong;
+        break;
+
+      case AudioServiceRepeatMode.group:
+        break;
+
+      case AudioServiceRepeatMode.all:
+        repeatButtonNotifier.value = RepeatState.repeatPlaylist;
+        break;
+    }
+  }
+
+  void shuffle() {
+    final enable = !isShuffleModeEnableNotifier.value;
+    isShuffleModeEnableNotifier.value = enable;
+    if (enable) {
+      audioHandler.setShuffleMode(AudioServiceShuffleMode.all);
+    } else {
+      audioHandler.setShuffleMode(AudioServiceShuffleMode.none);
+    }
+  }
+
+  Future<void> setShuffleMode(AudioServiceShuffleMode value) async {
+    isShuffleModeEnableNotifier.value = value == AudioServiceShuffleMode.all;
+    return audioHandler.setShuffleMode(value);
+  }
+
+  Future<void> add(MediaItem mediaItem) async {
+    audioHandler.addQueueItem(mediaItem);
+  }
+
+  Future<void> adds(List<MediaItem> mediaItems, int index) async {
+    if (mediaItems.isEmpty) {
+      return;
+    }
+    await (audioHandler as MyAudioHandler).setNewPlaylist(mediaItems, index);
+  }
+
+  void remove() {
+    final lastIndex = audioHandler.queue.value.length - 1;
+
+    if (lastIndex < 0) return;
+    audioHandler.removeQueueItemAt(lastIndex);
+  }
+  Future<void> removeAll() async {
+    final lastIndex = audioHandler.queue.value.length - 1;
+
+    if (lastIndex < 0) return;
+    audioHandler.removeQueueItemAt(lastIndex);
+  }
+
+  void dispose (){
+    audioHandler.customAction("dispose");
+  }
+
+  Future<void> stop() async {
+    await audioHandler.stop();
+    await audioHandler.seek(Duration.zero);
+    currentSongNotifier.value = null;
+    await removeAll();
+
+    await Future.delayed(const Duration(milliseconds: 300));    
+  }
+
 }
