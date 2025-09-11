@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fmusic/audio/page_manager.dart';
 import 'package:fmusic/audio/service_locator.dart';
+import 'package:fmusic/widgets/control_buttons.dart';
 import '../common/color.dart';
 import 'dart:ui' as ui;
 
@@ -83,6 +84,52 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
+                                ValueListenableBuilder<ProgressBarState>(
+                                  valueListenable: pageManager.progressNotifier,
+                                  builder: (context, value, __) {
+                                    final position = value.current;
+                                    final totalDuration = value.total;
+
+                                    return position == null
+                                        ? const SizedBox()
+                                        : (position.inSeconds.toDouble() <
+                                                    0.0 ||
+                                                (position.inSeconds.toDouble() >
+                                                    totalDuration.inSeconds
+                                                        .toDouble()))
+                                            ? const SizedBox()
+                                            : SliderTheme(
+                                                data: const SliderThemeData(
+                                                  activeTrackColor:
+                                                      JColor.primayColor,
+                                                  inactiveTrackColor:
+                                                      Colors.transparent,
+                                                  trackHeight: 5,
+                                                  thumbColor:
+                                                      JColor.primayColor,
+                                                  thumbShape:
+                                                      RoundSliderOverlayShape(
+                                                          overlayRadius: 2.5),
+                                                  overlayColor:
+                                                      Colors.transparent,
+                                                  overlayShape:
+                                                      RoundSliderOverlayShape(
+                                                          overlayRadius: 2),
+                                                ),
+                                                child: Center(
+                                                  child: Slider(
+                                                    inactiveColor: Colors.transparent,
+                                                    max: totalDuration.inSeconds.toDouble(),
+                                                      value: position.inSeconds
+                                                          .toDouble(),
+                                                      onChanged: (newPosition) {
+                                                        pageManager.seek(Duration(
+                                                            seconds: newPosition
+                                                                .round()));
+                                                      }),
+                                                ));
+                                  },
+                                ),
                                 ListTile(
                                   dense: false,
                                   onTap: () {},
@@ -116,7 +163,6 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                                                 "assets/images/999animé.jpg",
                                                 fit: BoxFit.cover,
                                               );
-                                            
                                             },
                                             placeholder: (context, url) {
                                               return Image.asset(
@@ -127,7 +173,10 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                                           ),
                                         ),
                                       )),
-                                  trailing: Container(),
+                                  trailing: const ControlButtons(
+                                    miniPlayer: true,
+                                    buttons: ["Previous", "Play/Pause", "Next"],
+                                  ),
                                 )
                               ],
                             ),
