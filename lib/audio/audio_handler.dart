@@ -8,9 +8,9 @@ Future<AudioHandler> initAudioService() async {
   return await AudioService.init(
       builder: () => MyAudioHandler(),
       config: const AudioServiceConfig(
-        androidNotificationChannelId: "com.example.fmusic",
+        androidNotificationChannelId: "com.example.fmusic.channel.audio",
         androidNotificationChannelName: "fmusic",
-        androidNotificationIcon: "",
+        androidNotificationIcon: "mipmap/launcher_icon",
         androidShowNotificationBadge: true,
         androidStopForegroundOnPause: true,
         notificationColor: JColor.bgColor,
@@ -151,15 +151,16 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
   }
 
   UriAudioSource createAudioSource(MediaItem mediaItem) {
-    return AudioSource.uri(Uri.parse(mediaItem.extras!['uri'] as String),
+    return AudioSource.uri(Uri.parse(mediaItem.extras!['url'] as String),
         tag: mediaItem);
   }
 
   List<UriAudioSource> createAudioSources(List<MediaItem> mediaItems) {
     return mediaItems
-        .map((item) => AudioSource.uri(Uri.parse(item.extras!['uri'] as String),
+        .map((item) => AudioSource.uri(Uri.parse(item.extras!['url'] as String),
             tag: item))
         .toList();
+    
   }
 
   @override
@@ -263,7 +264,9 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
 
     var getCount = queue.value.length;
     await playlist.removeRange(0, getCount);
+
     final audioSource = createAudioSources(mediaItems);
+
     await playlist.addAll(audioSource);
     final newQueue = queue.value..addAll(mediaItems);
     queue.add(newQueue);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fmusic/view/main_player/main_player_view.dart';
+import 'package:fmusic/audio/player_invoke.dart';
 import 'package:fmusic/view_model/allsong_view_model.dart';
 import 'package:fmusic/widgets/allsong_row.dart';
 import 'package:get/get.dart';
@@ -21,8 +21,19 @@ class AllsongView extends StatelessWidget {
                 children: [
                   AllsongRow(
                     objet: obj,
-                    onTap: (){
-                      Get.to(()=>  const MainPlayerView());
+                    isWeb: true,
+                    onTapPlay: (){
+                      // Get.to(()=>  const MainPlayerView());
+                      playerPlayProcessDebounce(allSC.allSongs.map((obj) => {
+                        "id": obj["id"].toString(),
+                        "title": obj["name"].toString(),
+                        "artist": obj["artists"].toString(),
+                        "album": obj["album"].toString(),
+                        "genre": obj["language"].toString(),
+                        "image": obj["image"].toString(),
+                        "url": obj["downloadUrl"].toString(),
+
+                      }).toList(), index);
                     },
                   ),
                 ],

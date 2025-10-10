@@ -6,8 +6,8 @@ class MediaitemConverter {
       bool autoPlay = true,
       String? playlistBox}) {
     return MediaItem(
-        id: song["id"].toString(),
-        title: song["title"].toString(),
+        id: song["id"].toString() ,
+        title: song["title"].toString() ,
         album: song["album"].toString(),
         artist: song["artist"].toString(),
         duration: Duration(
@@ -31,32 +31,30 @@ class MediaitemConverter {
         );
   }
 }
-
 String getImageUrl(String? imageUrl, {String quality = "high"}) {
   if (imageUrl == null) return "";
+  String fixedUrl = imageUrl.trim();
+
+  // Corrige juste le schéma
+  if (fixedUrl.startsWith("http://")) {
+    fixedUrl = fixedUrl.replaceFirst("http://", "https://");
+  }
+
   switch (quality) {
     case "high":
-      return imageUrl
-          .trim()
-          .replaceAll("http", "https")
+      return fixedUrl
           .replaceAll("50x50", "500x500")
           .replaceAll("150x150", "500x500");
     case "medium":
-      return imageUrl
-          .trim()
-          .replaceAll("http", "https")
+      return fixedUrl
           .replaceAll("50x50", "150x150")
           .replaceAll("500x500", "150x150");
     case "low":
-      return imageUrl
-          .trim()
-          .replaceAll("http", "https")
+      return fixedUrl
           .replaceAll("150x150", "50x50")
           .replaceAll("500x500", "50x50");
     default:
-      return imageUrl
-          .trim()
-          .replaceAll("http", "https")
+      return fixedUrl
           .replaceAll("50x50", "500x500")
           .replaceAll("150x150", "500x500");
   }

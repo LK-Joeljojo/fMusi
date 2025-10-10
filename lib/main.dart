@@ -34,10 +34,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    getIt<PageManager>().init();
-  }
+void dispose() {
+  getIt<PageManager>().dispose(); // ferme les streams, timers, etc.
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {

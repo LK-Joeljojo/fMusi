@@ -5,15 +5,41 @@ import 'package:fmusic/view/music/music_view.dart';
 import 'package:fmusic/view/setting/setting_view.dart';
 import 'package:fmusic/view_model/drawer_view_model.dart';
 import 'package:fmusic/view_model/navigation_bar_view_model.dart';
+import 'package:fmusic/widgets/mini_player_view.dart';
 import 'package:get/get.dart';
 
 import '../../common/color.dart';
 import '../../widgets/icon_text_row.dart';
 
-class NavigationBarView extends StatelessWidget {
-  NavigationBarView({super.key});
+class NavigationBarView extends StatefulWidget {
+  const NavigationBarView({super.key});
 
-  final nbController = Get.put(NavigationBarViewModel());
+  @override
+  State<NavigationBarView> createState() => _NavigationBarViewState();
+}
+
+class _NavigationBarViewState extends State<NavigationBarView> with SingleTickerProviderStateMixin {
+    TabController? controller;
+   int selectTab = 0;
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 3, vsync: this);
+
+    controller?.addListener(() {
+      selectTab = controller?.index ?? 0;
+      setState(() {
+        
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+  // final nbController = Get.put(NavigationBarViewModel());
   final drawerVm = Get.put(DrawerViewModel());
 
   @override
@@ -115,11 +141,16 @@ class NavigationBarView extends StatelessWidget {
           ],
         ),
       ),
-      body: TabBarView(controller: nbController.controller, children: [
-        HomeView(),
-        MusicView(),
-        SettingView(),
-      ]),
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children:[ TabBarView(controller: controller, children: [
+          HomeView(),
+          MusicView(),
+          SettingView(),
+        ]),
+        MiniPlayerView()
+        ]
+      ),
       bottomNavigationBar: Container(
           decoration: BoxDecoration(color: JColor.bgColor, boxShadow: [
             BoxShadow(
@@ -131,11 +162,10 @@ class NavigationBarView extends StatelessWidget {
             color: JColor.bgColor,
             height: 60,
             padding: const EdgeInsetsDirectional.only(top: 10),
-            child: Obx(
-              () => TabBar(
+            child:  TabBar(
                   indicatorWeight: 1,
                   indicatorColor: Colors.transparent,
-                  controller: nbController.controller,
+                  controller: controller,
                   labelColor: JColor.whiteColor.withOpacity(0.8),
                   labelStyle: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 12),
@@ -146,7 +176,7 @@ class NavigationBarView extends StatelessWidget {
                     Tab(
                       text: "Home",
                       icon: Image.asset(
-                        nbController.selectTab.value == 0
+                      selectTab == 0
                             ? NavigationBarImages.home
                             : NavigationBarImages.homeLight,
                         width: 24,
@@ -156,7 +186,7 @@ class NavigationBarView extends StatelessWidget {
                     Tab(
                       text: "Songs",
                       icon: Image.asset(
-                        nbController.selectTab.value == 1
+                        selectTab == 1
                             ? NavigationBarImages.musique
                             : NavigationBarImages.musiqueLight,
                         width: 24,
@@ -166,7 +196,7 @@ class NavigationBarView extends StatelessWidget {
                     Tab(
                       text: "Settings",
                       icon: Image.asset(
-                        nbController.selectTab.value == 2
+                        selectTab == 2
                             ? NavigationBarImages.settings
                             : NavigationBarImages.settingsLight,
                         width: 24,
@@ -175,7 +205,7 @@ class NavigationBarView extends StatelessWidget {
                     ),
                   ]),
             ),
-          )),
+          )
     );
   }
 }

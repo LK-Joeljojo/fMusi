@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fmusic/audio/page_manager.dart';
 import 'package:fmusic/audio/service_locator.dart';
+import 'package:fmusic/view/main_player/main_player_view.dart';
 import 'package:fmusic/widgets/control_buttons.dart';
 import '../common/color.dart';
 import 'dart:ui' as ui;
@@ -29,7 +30,6 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
   @override
   Widget build(BuildContext context) {
     final pageManager = getIt<PageManager>();
-    final double screenWith = MediaQuery.sizeOf(context).width;
 
     return ValueListenableBuilder<AudioProcessingState>(
       builder: (context, processingState, _) {
@@ -57,34 +57,102 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                     }
                     return Future.value(false);
                   },
-                  child: Card(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 2.0, vertical: 1.0),
-                    elevation: 0,
-                    color: JColor.whiteColor.withOpacity(0.1),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: JColor.blackColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(50)),
                     //color: Colors.white10,
-                    child: SizedBox(
-                      height: 76,
-                      child: ClipRect(
-                        child: BackdropFilter(
-                          filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                          child: ShaderMask(
-                            shaderCallback: (rect) {
-                              return const LinearGradient(
-                                  end: Alignment.topCenter,
-                                  begin: Alignment.bottomCenter,
-                                  colors: [
-                                    JColor.blackColor,
-                                    JColor.blackColor,
-                                    Colors.transparent
-                                  ]).createShader(
-                                  Rect.fromLTRB(0, 0, rect.right, rect.height));
-                            },
-                            blendMode: BlendMode.dstIn,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ValueListenableBuilder<ProgressBarState>(
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                        child: ShaderMask(
+                          shaderCallback: (rect) {
+                            return const LinearGradient(
+                                end: Alignment.topCenter,
+                                begin: Alignment.bottomCenter,
+                                colors: [
+                                  JColor.blackColor,
+                                  JColor.blackColor,
+                                  Colors.black45
+                                ]).createShader(
+                                Rect.fromLTRB(0, 0, rect.right, rect.height));
+                          },
+                          blendMode: BlendMode.dstIn,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                dense: false,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                          opaque: false,
+                                          pageBuilder: (context, _, __) =>
+                                              const MainPlayerView()));
+                                },
+                                title: Text(
+                                  mediaItem.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                subtitle: Text(
+                                  mediaItem.artist ?? "",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium
+                                      ?.apply(
+                                          color: JColor.whiteColor
+                                              .withOpacity(0.7)),
+                                ),
+                                leading: Hero(
+                                    tag: "currentArtWork",
+                                    child: Card(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      clipBehavior: Clip.antiAlias,
+                                      child: SizedBox.square(
+                                        dimension: 40,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  mediaItem.artUri.toString(),
+                                              fit: BoxFit.cover,
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return Image.asset(
+                                                  "assets/images/close.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                              placeholder: (context, url) {
+                                                return Image.asset(
+                                                  "assets/images/close.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                              width: 40,
+                                              height: 40,
+                                            )),
+                                      ),
+                                    )),
+                                trailing: const ControlButtons(
+                                  miniPlayer: true,
+                                  buttons: ["Previous","Play/Pause", "Next"],
+                                ),
+                              ),
+                              Container(
+                                color: JColor.whiteColor.withOpacity(0.2),
+                                child: ValueListenableBuilder<ProgressBarState>(
                                   valueListenable: pageManager.progressNotifier,
                                   builder: (context, value, __) {
                                     final position = value.current;
@@ -104,22 +172,25 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                                                       JColor.primayColor,
                                                   inactiveTrackColor:
                                                       Colors.transparent,
-                                                  trackHeight: 5,
+                                                  trackHeight: 2,
                                                   thumbColor:
                                                       JColor.primayColor,
                                                   thumbShape:
                                                       RoundSliderOverlayShape(
-                                                          overlayRadius: 2.5),
+                                                          overlayRadius: 0),
                                                   overlayColor:
-                                                      Colors.transparent,
+                                                      JColor.whiteColor,
                                                   overlayShape:
                                                       RoundSliderOverlayShape(
-                                                          overlayRadius: 2),
+                                                          overlayRadius: 0),
                                                 ),
                                                 child: Center(
                                                   child: Slider(
-                                                    inactiveColor: Colors.transparent,
-                                                    max: totalDuration.inSeconds.toDouble(),
+                                                      inactiveColor:
+                                                          Colors.transparent,
+                                                      max: totalDuration
+                                                          .inSeconds
+                                                          .toDouble(),
                                                       value: position.inSeconds
                                                           .toDouble(),
                                                       onChanged: (newPosition) {
@@ -130,56 +201,8 @@ class _MiniPlayerViewState extends State<MiniPlayerView> {
                                                 ));
                                   },
                                 ),
-                                ListTile(
-                                  dense: false,
-                                  onTap: () {},
-                                  title: Text(
-                                    mediaItem.title,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  subtitle: Text(
-                                    mediaItem.artist ?? "",
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  leading: Hero(
-                                      tag: "currentArtWork",
-                                      child: Card(
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: SizedBox.square(
-                                          dimension: 40,
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                mediaItem.artUri.toString(),
-                                            fit: BoxFit.cover,
-                                            errorWidget: (context, url, error) {
-                                              return Image.asset(
-                                                "assets/images/999animé.jpg",
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                            placeholder: (context, url) {
-                                              return Image.asset(
-                                                "assets/images/999animé.jpg",
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      )),
-                                  trailing: const ControlButtons(
-                                    miniPlayer: true,
-                                    buttons: ["Previous", "Play/Pause", "Next"],
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

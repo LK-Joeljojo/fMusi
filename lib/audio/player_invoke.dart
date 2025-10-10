@@ -15,7 +15,9 @@ Timer? debounce;
 
 void playerPlayProcessDebounce(List songsList, int index) {
   debounce?.cancel();
-  debounce = Timer(const Duration(milliseconds: 600), () {});
+  debounce = Timer(const Duration(milliseconds: 600), () {
+    PlayerInvoke.init(songsList: songsList, index: index);
+  });
 }
 
 class PlayerInvoke {
@@ -42,13 +44,14 @@ class PlayerInvoke {
 
   static setValues(List arr, int index, {recommend = false}) {
     final List<MediaItem> queue = [];
-    final Map playItem = arr[index] as Map;
-    final Map? nextItem =
-        index == arr.length - 1 ? null : arr[index + 1] as Map;
+    // final Map playItem = arr[index] as Map;
+    // final Map? nextItem =
+    //     index == arr.length - 1 ? null : arr[index + 1] as Map;
     queue.addAll(arr.map(
       (song) =>
           MediaitemConverter.mapToMediaItem(song as Map, autoPlay: recommend),
     ));
+    updateNPlay(queue, index);
   }
 
   static Future<void> updateNPlay(List<MediaItem> queue, int index) async {
@@ -56,7 +59,6 @@ class PlayerInvoke {
       await pageManager.setShuffleMode(AudioServiceShuffleMode.none);
       await pageManager.adds(queue, index);
       await pageManager.playAS();
-
     } catch (e) {
       print("error: $e");
     }

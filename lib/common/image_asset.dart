@@ -29,7 +29,8 @@ class SettingImages {
 
 class MusicImages {
   static String play = "assets/images/icon-play.png";
-  static String pause = "assets/images/icon-pause.png";
+  static String iconpause = "assets/images/icon-pause.png";
+  static String pause = "assets/images/pause_icon.png";
   static String more = "assets/images/more-fill.png";
   static String juiceWrld = "assets/images/legendsND.jpg";
   static String jwArtist = "assets/images/jW.jpeg";

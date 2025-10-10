@@ -113,11 +113,7 @@ class PlayPlaylistView extends StatelessWidget {
                               fontSize: 50.0,
                               fontWeight: FontWeight.w600,
                             ),
-                            // modifier: (double value) {
-                            //   final time =
-                            //       printDuration(Duration(seconds: value.toInt()));
-                            //   return time;
-                            // },
+
                           ),
                           startAngle: 270,
                           angleRange: 360,
@@ -127,17 +123,12 @@ class PlayPlaylistView extends StatelessWidget {
                         max: 100,
                         initialValue: 42,
                         onChange: (double value) {
-                          // callback providing a value while its being changed (with a pan gesture)
                         },
                         onChangeStart: (double startValue) {
-                          // callback providing a starting value (when a pan gesture starts)
                         },
                         onChangeEnd: (double endValue) {
-                          // ucallback providing an ending value (when a pan gesture ends)
                         },
-                        // innerWidget: (double value) {
-                        //   // use your custom widget inside the slider (gets a slider value from the callback)
-                        // },
+
                       ),
                     )
                   ],

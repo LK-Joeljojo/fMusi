@@ -21,7 +21,7 @@ class ControlButtons extends StatelessWidget {
     final pageManager = getIt<PageManager>();
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.min,
       children: buttons.map((e) {
         switch (e) {
@@ -37,6 +37,7 @@ class ControlButtons extends StatelessWidget {
                         height: miniPlayer ? 20 : 50,
                       ));
                 });
+                
           case "Play/Pause":
             return SizedBox(
               width: miniPlayer ? 40 : 70,
@@ -64,35 +65,39 @@ class ControlButtons extends StatelessWidget {
                                     onPressed: pageManager.pause,
                                     icon: Image.asset(
                                       MusicImages.pause,
-                                      width:  20,
-                                      height:  20 ,
+                                      width: 30,
+                                      height: 30,
+                                      color: JColor.whiteColor,
                                     ))
                                 : IconButton(
                                     onPressed: pageManager.play,
                                     icon: Image.asset(
                                       MusicImages.play,
-                                      width:  20,
-                                      height:  20 ,
+                                      width: 30,
+                                      height: 30,
+                                      color: JColor.whiteColor,
                                     )),
-                          ) 
-                          else
+                          )
+                        else
                           Center(
                             child: value == ButtonState.playing
                                 ? IconButton(
                                     onPressed: pageManager.pause,
                                     icon: Image.asset(
                                       MusicImages.pause,
-                                      width:  50,
-                                      height:  50 ,
+                                      width: 50,
+                                      height: 50,
+                                      color: JColor.whiteColor,
                                     ))
                                 : IconButton(
                                     onPressed: pageManager.play,
                                     icon: Image.asset(
                                       MusicImages.play,
-                                      width:  50,
-                                      height:  50 ,
+                                      width: 50,
+                                      height: 50,
+                                      color: JColor.whiteColor,
                                     )),
-                          ) 
+                          )
                       ],
                     );
                   }),
