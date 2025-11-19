@@ -181,7 +181,7 @@ class PageManager {
     return await audioHandler.customAction(name);
   }
 
-  Future<void> skipToAction(int index) async {
+  Future<void> skipToQueueItem(int index) async {
     return await audioHandler.skipToQueueItem(index);
   }
 

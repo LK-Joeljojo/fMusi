@@ -95,7 +95,7 @@ class MainPlayerView extends StatelessWidget {
           body: ValueListenableBuilder(
               valueListenable: pageManager.currentSongNotifier,
               builder: (context, mediaItem, child) {
-                if (mediaItem == null) return SizedBox();
+                if (mediaItem == null) return const SizedBox();
                 return SingleChildScrollView(
                   child: Column(
                     children: [
